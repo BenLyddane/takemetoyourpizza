@@ -1,11 +1,14 @@
 import React from "react";
 import "./home.css";
-
+import Navbar from "../navbar/Navbar";
 const Home = () => {
   return (
-    <div className="AppBody">
-      <h1 className="PizzaTitle">Pizza.</h1>
-    </div>
+    <>
+      <Navbar />
+      <div className="AppBody">
+        <h1 className="PizzaTitle">Pizza.</h1>
+      </div>
+    </>
   );
 };
 

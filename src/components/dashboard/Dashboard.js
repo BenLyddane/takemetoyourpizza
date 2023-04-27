@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { Card, Button, Alert } from "react-bootstrap";
 import { useAuth } from "../../context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
-
+import "./dashboard.css";
 export default function Dashboard() {
   const { currentUser, logout } = useAuth();
   const [error, setError] = useState("");
@@ -21,7 +20,7 @@ export default function Dashboard() {
     <>
       <div>
         <h2 className="text-center mb-4">Profile</h2>
-        {error && <Alert variant="danger">{error}</Alert>}
+        {error && <alert>{error}</alert>}
         <strong>Email: </strong> {currentUser?.email}
         <Link to="/update-profile" className="btn btn-primary w-100 mt-3">
           Update Profile
@@ -29,7 +28,9 @@ export default function Dashboard() {
       </div>
 
       <div className="w-100 text-center mt-2">
-        <button onClick={handleLogout}>Log Out</button>
+        <button className="LogoutButton" onClick={handleLogout}>
+          Log Out
+        </button>
       </div>
     </>
   );
