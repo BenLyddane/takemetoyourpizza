@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import "./signup.css";
 import { auth } from "../../firebaseConfig";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useDispatch, useSelector } from "react-redux";
 
 const SignUp = () => {
@@ -10,21 +11,20 @@ const SignUp = () => {
   const [fullName, setFullName] = useState("");
 
   const handleSignUp = async () => {
-    if (password == confirmPassword) {
+    if (password === confirmPassword) {
       try {
-        // const user = await createUserWithEmailAndPassword({
-        //   auth,
-        //   email,
-        //   password,
-        // });
-        // console.log(user);
+        const user = await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+        console.log(user);
         setEmail("");
         setPassword("");
         setConfirmPassword("");
         setFullName("");
       } catch (error) {
         console.log(error);
-        console.log(error.response);
       }
     } else {
       alert("passwords do not match");
