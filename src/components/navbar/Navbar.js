@@ -5,8 +5,12 @@ import { Link } from "react-router-dom";
 const Navbar = () => {
   return (
     <div>
-      <button className="LoginButton">Login</button>
-      <button className="SignUpButton">Sign Up</button>
+      <Link to="Login">
+        <button className="LoginButton">Login</button>
+      </Link>
+      <Link to="SignUp">
+        <button className="SignUpButton">Sign Up</button>
+      </Link>
     </div>
   );
 };

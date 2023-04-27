@@ -1,7 +1,17 @@
-import React from "react";
+import React, { useRef } from "react";
+import "./signup.css";
 
-const Signup = () => {
-  return <div></div>;
+
+const SignUp = () => {
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  const passwordConfirmRef = useRef();
+  return (
+    <>
+     
+      
+    </>
+  );
 };
 
-export default Signup;
+export default SignUp;
