@@ -1,11 +1,6 @@
-.SignUpCard {
-  background-color: #720f04;
-  color: white;
-  font-family: "Helvetica Neue", Arial, Helvetica, sans-ser;
+.SignUpForm { 
 
+    display: flex; 
+    flex-direction: column;
 }
 
-.submitButton { 
-    background-color: white;
-    text-decoration: whitesmoke;
-}

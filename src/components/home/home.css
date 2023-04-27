@@ -1,0 +1,17 @@
+.body {
+    background-color: #b21807;
+  }
+  
+  .PizzaTContainer {
+    background-color: #b21807;
+  }
+  
+  .PizzaTitle {
+    background-color: #b21807;
+    font-size: calc((150vw) / 7);
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    margin: 0;
+  }
+  
