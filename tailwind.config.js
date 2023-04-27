@@ -5,7 +5,7 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     fontFamily: {
-      sans: ["Helvetica Neue", ...defaultTheme.fontFamily.sans],
+      sans: ["Helvetica", ...defaultTheme.fontFamily.sans],
     },
     extend: {},
   },
