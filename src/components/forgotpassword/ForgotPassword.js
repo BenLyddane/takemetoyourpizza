@@ -1,9 +1,9 @@
 import React, { useRef, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { Link } from "react-router-dom";
-import Navbar from '../navbar/Navbar'
+import Navbar from "../navbar/Navbar";
 export default function ForgotPassword() {
-  const emailRef = useRef();
+  const [email, setEmail] = useState();
   const { resetPassword } = useAuth();
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
@@ -16,7 +16,7 @@ export default function ForgotPassword() {
       setMessage("");
       setError("");
       setLoading(true);
-      await resetPassword(emailRef.current.value);
+      await resetPassword(email);
       setMessage("Check your inbox for further instructions");
     } catch {
       setError("Failed to reset password");
@@ -27,8 +27,9 @@ export default function ForgotPassword() {
 
   return (
     <>
-     <Navbar />
+      <Navbar />
       <div className="bg-grey-lighter min-h-screen flex flex-col">
+        
         <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
           <div className="bg-white px-6 py-8 rounded shadow-md text-black w-full">
             <h1 className="mb-8 text-3xl text-center">Forgot Password</h1>
@@ -38,6 +39,9 @@ export default function ForgotPassword() {
               className="block border border-grey-light w-full p-3 rounded mb-4"
               name="email"
               placeholder="Email"
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
             />
 
             <button
@@ -53,6 +57,9 @@ export default function ForgotPassword() {
               <Link to="/signup">Need to register?</Link>
             </div>
           </div>
+          <div>
+          {error && <alert>{error}</alert>}
+        {message && <alert>{message}</alert>}</div>
         </div>
       </div>
     </>

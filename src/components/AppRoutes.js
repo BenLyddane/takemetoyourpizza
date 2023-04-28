@@ -9,6 +9,7 @@ import ForgotPassword from "./forgotpassword/ForgotPassword";
 import Dashboard from "./dashboard/Dashboard";
 import { useAuth } from "../context/AuthContext";
 
+
 const AppRoutes = () => {
   const { currentUser } = useAuth();
 

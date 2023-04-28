@@ -35,7 +35,6 @@ const SignUp = () => {
     <>
       <Navbar />
       <div className="bg-grey-lighter min-h-screen flex flex-col">
-        {error && <alert>{error}</alert>}
         <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
           <div className="bg-white px-6 py-8 rounded shadow-md text-black w-full">
             <h1 className="mb-8 text-3xl text-center">Sign up</h1>
@@ -88,6 +87,7 @@ const SignUp = () => {
             </button>
             <Link to="/login">
               <div className="w-100 text-left mt-2">Already registered?</div>
+              <div>{error && <p>{error}</p>}</div>
             </Link>
           </div>
         </div>
