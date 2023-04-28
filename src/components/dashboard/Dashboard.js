@@ -1,19 +1,15 @@
-import React, { Fragment, useState } from "react";
-import { useAuth } from "../../context/AuthContext";
-import { Link, useNavigate } from "react-router-dom";
+import React from "react";
+
 import "./dashboard.css";
 import PizzaSidebar from "./PizzaSidebar/PizzaSidebar";
 import { ProSidebarProvider } from "react-pro-sidebar";
 export default function Dashboard() {
-
-
   return (
     <>
-      <Fragment>
-        <ProSidebarProvider backgroundColor="#FFA600">
-            <PizzaSidebar />
-        </ProSidebarProvider>
-      </Fragment>
+      <ProSidebarProvider backgroundColor="#FFA600">
+        <PizzaSidebar />
+      </ProSidebarProvider>
+      <button className="testbutton">This is the test button 123</button>
     </>
   );
 }
