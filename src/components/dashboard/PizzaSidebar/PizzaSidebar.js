@@ -1,90 +1,58 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./pizzasidebar.css";
 import {
   Sidebar,
   Menu,
   MenuItem,
-  SubMenu,
   useProSidebar,
 } from "react-pro-sidebar";
+import { BiLogOut } from "react-icons/bi";
 
-import {
-  RiHome4Line,
-  RiTeamLine,
-  RiCalendar2Line,
-  RiFolder2Line,
-  RiUserFollowLine,
-  RiPlantLine,
-  RiStackLine,
-  RiUserUnfollowLine,
-} from "react-icons/ri";
-import { FiChevronsLeft, FiChevronsRight } from "react-icons/fi/";
+import { GiPizzaCutter } from "react-icons/gi";
+
+import { CiPizza } from "react-icons/ci";
+
+import { FaStore } from "react-icons/fa";
+
 import { useAuth } from "../../../context/AuthContext";
 
 const PizzaSidebar = () => {
   const { collapseSidebar } = useProSidebar();
   const [collapsed, setCollapsed] = useState(false);
-
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
   const [toggled, setToggled] = useState(false);
   const { currentUser } = useAuth();
+  const { logout } = useAuth();
 
-  const handleCollapsedChange = () => {
-    collapseSidebar();
-    setCollapsed(!collapsed);
-  };
-  const handleToggleSidebar = (value) => {
-    setToggled(value);
-  };
+  async function handleLogout() {
+    setError("");
+    try {
+      await logout();
+      navigate("/login");
+    } catch {
+      setError("Failed to logout");
+    }
+  }
 
   return (
     <div>
       <Sidebar
-        className={`app ${toggled ? "toggled" : ""} sbb`}
         style={{ height: "100%", position: "absolute" }}
         collapsed={collapsed}
         toggled={toggled}
-        handleToggleSidebar={handleToggleSidebar}
-        handleCollapsedChange={handleCollapsedChange}
+        backgroundColor={"#FFA600"}
+        rootStyles={{color: "#black"}}
       >
         <main>
           <Menu>
-            {collapsed ? (
-              <MenuItem
-                icon={<FiChevronsRight />}
-                onClick={handleCollapsedChange}
-              ></MenuItem>
-            ) : (
-              <MenuItem
-                suffix={<FiChevronsLeft />}
-                onClick={handleCollapsedChange}
-              >
-                <div
-                  style={{
-                    padding: "9px",
-                    textTransform: "uppercase",
-                    fontWeight: "bold",
-                    fontSize: 14,
-                    letterSpacing: "1px",
-                  }}
-                >
-                  {currentUser.email}
-                </div>
-              </MenuItem>
-            )}
-            <hr />
-          </Menu>
-
-          <Menu>
-            <MenuItem icon={<RiHome4Line />}>Dashboard</MenuItem>
-            <SubMenu defaultOpen label={"Professors"} icon={<RiTeamLine />}>
-              <MenuItem icon={<RiUserFollowLine />}>Active </MenuItem>
-              <MenuItem icon={<RiUserUnfollowLine />}>Ex Professors</MenuItem>
-              <MenuItem icon={<RiCalendar2Line />}>Probation Period</MenuItem>
-            </SubMenu>
-            <SubMenu defaultOpen label={"Records"} icon={<RiFolder2Line />}>
-              <MenuItem icon={<RiStackLine />}>Senior Students</MenuItem>
-              <MenuItem icon={<RiPlantLine />}>Junior Students</MenuItem>
-            </SubMenu>
+            <MenuItem icon={<CiPizza />}>My Profile</MenuItem>
+            <MenuItem icon={<GiPizzaCutter />}>Update Profile</MenuItem>
+            <MenuItem icon={<FaStore />}>Pizza Stores</MenuItem>
+            <MenuItem icon={<BiLogOut />} onClick={handleLogout}>
+              Log Out
+            </MenuItem>
           </Menu>
         </main>
       </Sidebar>
