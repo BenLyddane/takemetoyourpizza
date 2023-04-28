@@ -8,6 +8,9 @@ import Home from "./home/home";
 import ForgotPassword from "./forgotpassword/ForgotPassword";
 import Dashboard from "./dashboard/Dashboard";
 import { useAuth } from "../context/AuthContext";
+import UpdateProfile from "./updateprofile/UpdateProfile";
+import PizzaShops from "./pizzashops/PizzaShops";
+import MyProfile from "./myprofile/MyProfile";
 
 
 const AppRoutes = () => {
@@ -15,13 +18,20 @@ const AppRoutes = () => {
 
   return (
     <div>
-     
       <Routes>
         {currentUser ? (
-          <Route path="/" element={<Dashboard />} />
+          <>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/UpdateProfile" element={<UpdateProfile />}>
+              
+            </Route>
+            <Route path="/PizzaShops" element={<PizzaShops />} />
+              <Route path="/MyProfile" element={<MyProfile />} />
+          </>
         ) : (
           <Route path="/" element={<Home />} />
         )}
+
         <Route path="/SignUp" element={<SignUp />} />
         <Route path="/Login" element={<Login />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
