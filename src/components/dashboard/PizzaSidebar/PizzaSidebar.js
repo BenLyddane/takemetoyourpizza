@@ -13,7 +13,6 @@ import { FaStore } from "react-icons/fa";
 import { useAuth } from "../../../context/AuthContext";
 
 const PizzaSidebar = () => {
- 
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
@@ -34,7 +33,6 @@ const PizzaSidebar = () => {
     <div>
       <Sidebar
         style={{ height: "100%", position: "absolute" }}
-        
         backgroundColor={"#FFA600"}
         rootStyles={{ color: "#black" }}
       >
@@ -51,7 +49,7 @@ const PizzaSidebar = () => {
                 }}
               >
                 {/* Change to user's full name when available */}
-                {currentUser.email}
+                {currentUser.displayName}
               </div>
             </MenuItem>
           </Menu>

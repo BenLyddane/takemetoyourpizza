@@ -8,6 +8,7 @@ import {
   sendPasswordResetEmail,
   updateEmail as updateEmailFirebase,
   updatePassword as updatePasswordFirebase,
+  updateProfile
 } from "firebase/auth";
 
 const AuthContext = React.createContext();
@@ -20,8 +21,21 @@ export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState();
   const [loading, setLoading] = useState(true);
 
-  function signup(email, password) {
-    return createUserWithEmailAndPassword(auth, email, password);
+  function signup(email, password, fullName) {
+    createUserWithEmailAndPassword(auth, email, password)
+      updateProfile(auth, {
+        displayName: fullName,
+      }
+    );
+  }
+
+  function updateProfilePicture(photoUrl) { 
+    return updateProfile(currentUser, {photoURL: photoUrl})
+}
+
+
+  function updateDisplayName(fullName) { 
+      return updateProfile(currentUser, {displayName: fullName})
   }
 
   function login(email, password) {
@@ -61,6 +75,8 @@ export function AuthProvider({ children }) {
     resetPassword,
     updateEmail,
     updatePassword,
+    updateDisplayName, 
+    updateProfilePicture
   };
 
   return (

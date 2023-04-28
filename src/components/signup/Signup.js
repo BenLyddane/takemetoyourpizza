@@ -1,7 +1,6 @@
 import React, { useRef, useState } from "react";
 import "./signup.css";
 import { useAuth } from "../../context/AuthContext";
-import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
 import Navbar from "../navbar/Navbar";
@@ -12,7 +11,7 @@ const SignUp = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [fullName, setFullName] = useState("");
   const [error, setError] = useState("");
-  const { signup } = useAuth();
+  const { signup, updateDisplayName } = useAuth();
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const handleSignUp = async () => {
@@ -24,9 +23,11 @@ const SignUp = () => {
       setError("");
       setLoading(true);
       const user = await signup(email, password);
+      const name = await updateDisplayName(fullName);
       navigate("/");
     } catch (error) {
       setError("Failed to create an account ");
+      console.log(error);
     }
     setLoading(false);
   };
