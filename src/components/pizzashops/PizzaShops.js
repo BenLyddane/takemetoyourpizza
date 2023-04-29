@@ -35,14 +35,14 @@ const PizzaShops = () => {
   return (
     <ProSidebarProvider backgroundColor="#FFA600">
       <PizzaSidebar />
-      <div className="flex ml-72">
+      <div className="inline-flex flex-wrap ml-72">
         {pizzaShops.map((pizzaShop) => {
           return (
             <>
               <Card
                 key={pizzaShop.id}
                 className="relative m-5"
-                sx={{ maxWidth: 345 }}
+                sx={{ maxWidth: 345, minWidth: 200 }}
               >
                 <CardMedia
                   component="img"
