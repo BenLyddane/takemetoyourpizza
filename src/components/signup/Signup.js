@@ -15,7 +15,8 @@ const SignUp = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const handleSignUp = async () => {
+  const handleSignUp = async (e) => {
+    e.preventDefault();
     if (password !== confirmPassword) {
       return setError("Passwords do not match");
     }
