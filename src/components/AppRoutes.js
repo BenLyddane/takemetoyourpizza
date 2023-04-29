@@ -11,21 +11,21 @@ import { useAuth } from "../context/AuthContext";
 import UpdateProfile from "./updateprofile/UpdateProfile";
 import PizzaShops from "./pizzashops/PizzaShops";
 import MyProfile from "./myprofile/MyProfile";
+import AddPizzaShop from "./dashboard/AddPizzaShop/AddPizzaShop";
 
 const AppRoutes = () => {
   const { currentUser } = useAuth();
 
   return (
     <div>
-     
       <Routes>
         {currentUser ? (
-         
           <>
             <Route path="/" element={<Dashboard />} />
-            <Route path="/UpdateProfile" element={<UpdateProfile />}/>
+            <Route path="/UpdateProfile" element={<UpdateProfile />} />
             <Route path="/PizzaShops" element={<PizzaShops />} />
-              <Route path="/MyProfile" element={<MyProfile />} />
+            <Route path="/AddPizzaShop" element={<AddPizzaShop />} />
+            <Route path="/MyProfile" element={<MyProfile />} />
           </>
         ) : (
           <Route path="/" element={<Home />} />

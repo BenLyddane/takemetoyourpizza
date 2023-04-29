@@ -5,6 +5,7 @@ import { Sidebar, Menu, MenuItem, useProSidebar } from "react-pro-sidebar";
 import { BiLogOut } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import { GiPizzaCutter } from "react-icons/gi";
+import { MdOutlineCreate } from "react-icons/md";
 
 import { CiPizza } from "react-icons/ci";
 
@@ -49,7 +50,9 @@ const PizzaSidebar = () => {
                 }}
               >
                 {/* Change to user's full name when available */}
-                {currentUser.displayName? currentUser.displayName: currentUser.email}
+                {currentUser.displayName
+                  ? currentUser.displayName
+                  : currentUser.email}
               </div>
             </MenuItem>
           </Menu>
@@ -65,6 +68,12 @@ const PizzaSidebar = () => {
             </MenuItem>
             <MenuItem component={<Link to="/PizzaShops" />} icon={<FaStore />}>
               Pizza Shops
+            </MenuItem>
+            <MenuItem
+              component={<Link to="/AddPizzaShop" />}
+              icon={<MdOutlineCreate />}
+            >
+              Add New Pizza Shop
             </MenuItem>
             <MenuItem icon={<BiLogOut />} onClick={handleLogout}>
               Log Out
