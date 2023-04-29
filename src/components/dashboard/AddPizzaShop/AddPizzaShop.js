@@ -24,25 +24,31 @@ const AddPizzaShop = () => {
   const navigate = useNavigate();
 
   const handleImageChange = (e) => {
-    if (e.target.files[0]) {
-      setPizzaShopImage(e.target.files[0]);
-      const imageRef = ref(storage, `pizzashopimages/${pizzaShopName}-Image`);
-      uploadBytes(imageRef, pizzaShopImage)
-        .then(() => {
-          getDownloadURL(imageRef)
-            .then((url) => {
-              setPizzaShopImageUrl(url);
-            })
-            .catch((error) => {
-              console.log(error.message, "error getting the image url");
-            });
-          setPizzaShopImage(null);
-        })
-        .catch((error) => {
-          console.log(error.message);
-        });
-    }
+    const metadata = {
+      contentType: "image/",
+    };
+    const pizzaImageReference = ref(
+      storage,
+      `pizzashopimages/${pizzaShopName}-Image`
+    );
+   
+if (e.currentTarget.files[0]){
+    uploadBytes(pizzaImageReference, e.currentTarget.files[0], metadata)
+      .then(() => {
+        getDownloadURL(pizzaImageReference)
+          .then((downloadUrl) => {
+            setPizzaShopImageUrl(downloadUrl);
+            console.log("file available at", downloadUrl);
+          })
+          .catch((error) => {
+            console.log(error.message, "error getting the image url");
+          });
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
   };
+  } ;
 
   async function handleAddPizzaShop() {
     try {
@@ -108,7 +114,11 @@ const AddPizzaShop = () => {
                 </Select>
               </FormControl>
 
-              <input type="file" accept="image" onChange={handleImageChange} />
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleImageChange}
+              />
               <button
                 type="submit"
                 className="w-full text-center py-3 rounded bg-green text-white hover:bg-green-dark focus:outline-none my-1 createAccountButton"
