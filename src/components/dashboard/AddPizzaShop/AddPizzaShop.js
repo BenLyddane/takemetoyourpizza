@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { ProSidebarProvider } from "react-pro-sidebar";
 import PizzaSidebar from "../PizzaSidebar/PizzaSidebar";
 import { getDocs, addDoc, collection } from "firebase/firestore";
-import { db } from "../../../firebaseConfig";
+import { db, storage } from "../../../firebaseConfig";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import {
   Select,
   MenuItem,
@@ -17,7 +18,31 @@ const AddPizzaShop = () => {
   const [pizzaShopDescription, setPizzaShopDescription] = useState("");
   const [pizzaShopBorough, setPizzaShopBorough] = useState("");
   const [error, setError] = useState("");
+  const [pizzaShopImageUrl, setPizzaShopImageUrl] = useState("");
+  const [pizzaShopImage, setPizzaShopImage] = useState(null);
+
   const navigate = useNavigate();
+
+  const handleImageChange = (e) => {
+    if (e.target.files[0]) {
+      setPizzaShopImage(e.target.files[0]);
+      const imageRef = ref(storage, `pizzashopimages/${pizzaShopName}-Image`);
+      uploadBytes(imageRef, pizzaShopImage)
+        .then(() => {
+          getDownloadURL(imageRef)
+            .then((url) => {
+              setPizzaShopImageUrl(url);
+            })
+            .catch((error) => {
+              console.log(error.message, "error getting the image url");
+            });
+          setPizzaShopImage(null);
+        })
+        .catch((error) => {
+          console.log(error.message);
+        });
+    }
+  };
 
   async function handleAddPizzaShop() {
     try {
@@ -25,6 +50,7 @@ const AddPizzaShop = () => {
         pizzaShopName: pizzaShopName,
         pizzaShopDescription: pizzaShopDescription,
         pizzaShopBorough: pizzaShopBorough,
+        pizzaShopImageUrl: pizzaShopImageUrl,
       });
       navigate("/PizzaShops");
     } catch (err) {
@@ -81,6 +107,8 @@ const AddPizzaShop = () => {
                   </MenuItem>
                 </Select>
               </FormControl>
+
+              <input type="file" accept="image" onChange={handleImageChange} />
               <button
                 type="submit"
                 className="w-full text-center py-3 rounded bg-green text-white hover:bg-green-dark focus:outline-none my-1 createAccountButton"
