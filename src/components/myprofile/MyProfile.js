@@ -3,6 +3,12 @@ import { ProSidebarProvider } from "react-pro-sidebar";
 import PizzaSidebar from "../dashboard/PizzaSidebar/PizzaSidebar";
 import { useAuth } from "../../context/AuthContext";
 import { Avatar } from "@mui/material";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
 
 const MyProfile = () => {
   const { currentUser } = useAuth();
@@ -10,13 +16,28 @@ const MyProfile = () => {
   return (
     <ProSidebarProvider backgroundColor="#FFA600">
       <PizzaSidebar />
-      <Avatar className="ml-72" src={currentUser.photoURL} sx={{ width: 150, height: 150 }} />
 
-      <div className="relative ml-72">
-        My Profile Info
-        <div className="relative">User Email: {currentUser.email} </div>
-        <div className="relative">Display Name: {currentUser.displayName} </div>
-      </div>
+      <Card className="absolute mt-5 ml-72 p-5" sx={{ maxWidth: 345 }}>
+        <CardMedia
+          component="img"
+          alt="Profile Picture"
+          height="140"
+          image={currentUser.photoURL}
+        />
+        <CardContent>
+          <Typography gutterBottom variant="h7" component="div">
+            Username: {currentUser.displayName}
+          </Typography>
+          <Typography gutterBottom variant="h7" component="div">
+            Email: {currentUser.email}
+          </Typography>
+        </CardContent>
+        <CardActions>
+          <Button size="small">Temp</Button>
+        </CardActions>
+      </Card>
+
+  
     </ProSidebarProvider>
   );
 };

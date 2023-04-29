@@ -4,6 +4,12 @@ import PizzaSidebar from "../dashboard/PizzaSidebar/PizzaSidebar";
 import { getDocs, addDoc, collection, query } from "firebase/firestore";
 import { db } from "../../firebaseConfig";
 import { Avatar } from "@mui/material";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
 
 const PizzaShops = () => {
   const [pizzaShops, setPizzaShops] = useState([]);
@@ -29,16 +35,34 @@ const PizzaShops = () => {
   return (
     <ProSidebarProvider backgroundColor="#FFA600">
       <PizzaSidebar />
-      <div className="ml-72">
+      <div className="flex ml-72">
         {pizzaShops.map((pizzaShop) => {
           return (
-            <div>
-              <Avatar
-                src={pizzaShop.pizzaShopImageUrl}
-                sx={{ width: 150, height: 150 }}
-              />
-              <h1>Pizza Shop Name: {pizzaShop.pizzaShopName}</h1>
-            </div>
+            <>
+              <Card
+                key={pizzaShop.id}
+                className="relative m-5"
+                sx={{ maxWidth: 345 }}
+              >
+                <CardMedia
+                  component="img"
+                  alt="Profile Picture"
+                  height="140"
+                  image={pizzaShop.pizzaShopImageUrl}
+                />
+                <CardContent>
+                  <Typography gutterBottom variant="h7" component="div">
+                    Pizza Shop: {pizzaShop.pizzaShopName}
+                  </Typography>
+                  <Typography gutterBottom variant="h7" component="div">
+                    Description: {pizzaShop.pizzaShopDescription}
+                  </Typography>
+                </CardContent>
+                <CardActions>
+                  <Button size="small">View {pizzaShop.pizzaShopName}</Button>
+                </CardActions>
+              </Card>
+            </>
           );
         })}
       </div>
