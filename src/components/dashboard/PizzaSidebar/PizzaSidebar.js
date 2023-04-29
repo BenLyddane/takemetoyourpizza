@@ -3,13 +3,14 @@ import { useNavigate } from "react-router-dom";
 import "./pizzasidebar.css";
 import { Sidebar, Menu, MenuItem, useProSidebar } from "react-pro-sidebar";
 import { BiLogOut } from "react-icons/bi";
-import { Link } from "react-router-dom";
-import { GiPizzaCutter } from "react-icons/gi";
-import { Route } from "react-router-dom";
-import { CiPizza } from "react-icons/ci";
-import { FaStore } from "react-icons/fa";
-import { useAuth } from "../../../context/AuthContext";
 
+import { GiPizzaCutter } from "react-icons/gi";
+
+import { CiPizza } from "react-icons/ci";
+
+import { FaStore } from "react-icons/fa";
+
+import { useAuth } from "../../../context/AuthContext";
 
 const PizzaSidebar = () => {
   const [error, setError] = useState("");
@@ -37,7 +38,7 @@ const PizzaSidebar = () => {
       >
         <main>
           <Menu>
-            <MenuItem component={<Link to="/" />}>
+            <MenuItem>
               <div
                 style={{
                   padding: "9px",
@@ -53,14 +54,9 @@ const PizzaSidebar = () => {
             </MenuItem>
           </Menu>
           <Menu>
-            <MenuItem component={<Link to="/MyProfile" />} icon={<CiPizza />}>My Profile</MenuItem>
-            <MenuItem
-              component={<Link to="/UpdateProfile" />}
-              icon={<GiPizzaCutter />}
-            >
-              Update Profile
-            </MenuItem>
-            <MenuItem component={<Link to="/PizzaShops " />}icon={<FaStore />}>Pizza Shops</MenuItem>
+            <MenuItem icon={<CiPizza />}>My Profile</MenuItem>
+            <MenuItem icon={<GiPizzaCutter />}>Update Profile</MenuItem>
+            <MenuItem icon={<FaStore />}>Pizza Shops</MenuItem>
             <MenuItem icon={<BiLogOut />} onClick={handleLogout}>
               Log Out
             </MenuItem>
