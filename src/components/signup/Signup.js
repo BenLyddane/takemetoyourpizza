@@ -9,7 +9,6 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [fullName, setFullName] = useState("");
   const [error, setError] = useState("");
   const { signup, updateDisplayName } = useAuth();
   const [loading, setLoading] = useState(false);
@@ -25,12 +24,12 @@ const SignUp = () => {
       setError("");
       setLoading(true);
       const user = await signup(email, password);
-      const name = await updateDisplayName(fullName);
       navigate("/");
     } catch (error) {
       setError("Failed to create an account ");
       console.log(error);
     }
+
     setLoading(false);
   };
 
@@ -41,15 +40,6 @@ const SignUp = () => {
         <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
           <div className="bg-white px-6 py-8 rounded shadow-md text-black w-full">
             <h1 className="mb-8 text-3xl text-center">Sign up</h1>
-            <input
-              type="text"
-              className="block border border-grey-light w-full p-3 rounded mb-4"
-              name="fullName"
-              placeholder="Full Name"
-              onChange={(e) => {
-                setFullName(e.target.value);
-              }}
-            />
 
             <input
               type="text"

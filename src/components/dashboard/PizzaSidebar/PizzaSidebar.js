@@ -49,7 +49,7 @@ const PizzaSidebar = () => {
                 }}
               >
                 {/* Change to user's full name when available */}
-                {currentUser.displayName}
+                {currentUser.displayName? currentUser.displayName: currentUser.email}
               </div>
             </MenuItem>
           </Menu>
