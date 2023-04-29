@@ -14,6 +14,7 @@ const SignUp = () => {
   const { signup, updateDisplayName } = useAuth();
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
   const handleSignUp = async () => {
     if (password !== confirmPassword) {
       return setError("Passwords do not match");

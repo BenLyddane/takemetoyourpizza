@@ -8,7 +8,7 @@ import {
   sendPasswordResetEmail,
   updateEmail as updateEmailFirebase,
   updatePassword as updatePasswordFirebase,
-  updateProfile
+  updateProfile,
 } from "firebase/auth";
 
 const AuthContext = React.createContext();
@@ -22,20 +22,16 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
   function signup(email, password, fullName) {
-    createUserWithEmailAndPassword(auth, email, password)
-      updateProfile(auth, {
-        displayName: fullName,
-      }
-    );
+    return createUserWithEmailAndPassword(auth, email, password);
+    
   }
 
-  function updateProfilePicture(photoUrl) { 
-    return updateProfile(currentUser, {photoURL: photoUrl})
-}
+  function updateProfilePicture(photoUrl) {
+    return updateProfile(currentUser, { photoURL: photoUrl });
+  }
 
-
-  function updateDisplayName(fullName) { 
-      return updateProfile(currentUser, {displayName: fullName})
+  function updateDisplayName(fullName) {
+    return updateProfile(currentUser, { displayName: fullName });
   }
 
   function login(email, password) {
@@ -51,7 +47,7 @@ export function AuthProvider({ children }) {
   }
 
   function updateEmail(email) {
-    return updateEmailFirebase(auth, currentUser, email);
+    return updateEmailFirebase(currentUser, email);
   }
 
   function updatePassword(password) {
@@ -75,8 +71,8 @@ export function AuthProvider({ children }) {
     resetPassword,
     updateEmail,
     updatePassword,
-    updateDisplayName, 
-    updateProfilePicture
+    updateDisplayName,
+    updateProfilePicture,
   };
 
   return (
