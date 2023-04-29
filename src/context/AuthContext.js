@@ -30,7 +30,7 @@ export function AuthProvider({ children }) {
   }
 
   function updateDisplayName(fullName) {
-    return updateProfile(currentUser, { displayName: fullName });
+    return updateProfile(auth.currentUser, { displayName: fullName });
   }
 
   function login(email, password) {
@@ -60,7 +60,7 @@ export function AuthProvider({ children }) {
     });
 
     return unsubscribe;
-  }, []);
+  }, [signup]);
 
   const value = {
     currentUser,

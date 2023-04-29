@@ -20,7 +20,7 @@ export default function Login() {
       const user = await login(email, password);
       navigate("/");
     } catch {
-      setError("Failed to Login");
+      setError("Failed to Login. Check password and try again.");
     }
     setLoading(false);
   }
