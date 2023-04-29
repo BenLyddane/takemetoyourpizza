@@ -38,14 +38,14 @@ if (e.currentTarget.files[0]){
         getDownloadURL(pizzaImageReference)
           .then((downloadUrl) => {
             setPizzaShopImageUrl(downloadUrl);
-            console.log("file available at", downloadUrl);
+         
           })
           .catch((error) => {
-            console.log(error.message, "error getting the image url");
+            setError(error)
           });
       })
       .catch((error) => {
-        console.log(error.message);
+        setError(error)
       });
   };
   } ;
@@ -117,6 +117,7 @@ if (e.currentTarget.files[0]){
               <input
                 type="file"
                 accept="image/*"
+                multiple={false}
                 onChange={handleImageChange}
               />
               <button

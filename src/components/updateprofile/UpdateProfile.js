@@ -4,6 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import "./updateprofile.css";
 import PizzaSidebar from "../dashboard/PizzaSidebar/PizzaSidebar";
 import { ProSidebarProvider } from "react-pro-sidebar";
+import { storage } from "../../firebaseConfig";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 export default function UpdateProfile() {
   const [newEmail, setNewEmail] = useState("");
   const [newPassword, setNewPassword] = useState("");
@@ -21,6 +23,36 @@ export default function UpdateProfile() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
+  const handleImageChange = (e) => {
+    const metadata = {
+      contentType: "image/",
+    };
+    const profileImageReference = ref(
+      storage,
+      `profileimages/${currentUser.displayName}-Image`
+    );
+
+    if (e.currentTarget.files[0]) {
+      uploadBytes(profileImageReference, e.currentTarget.files[0], metadata)
+        .then(() => {
+          getDownloadURL(profileImageReference)
+            .then((downloadUrl) => {
+              setNewPhotoUrl(downloadUrl);
+            })
+            .catch((error) => {
+              setError(error);
+            });
+        })
+        .catch((error) => {
+          setError(error);
+        });
+    }
+  };
+
+  async function handleAddProfileImage() {
+    await updateProfilePicture(newPhotoUrl);
+    navigate("/MyProfile");
+  }
   function handleSubmit(e) {
     //if passwords are not same I set this error
     e.preventDefault();
@@ -35,8 +67,7 @@ export default function UpdateProfile() {
       promises.push(updateDisplayName(newDisplayName));
     }
 
-
-    if ( newEmail !== currentUser.email) {
+    if (newEmail !== currentUser.email) {
       promises.push(updateEmail(newEmail));
       //Check if our email is not equal to our current email
       //if we've changed our email, I'll want to add that email by using (promises.push)
@@ -45,21 +76,20 @@ export default function UpdateProfile() {
       promises.push(updatePassword(newPassword));
     }
 
- 
-     Promise.all(promises) //Our array promises
+    Promise.all(promises) //Our array promises
       .then(() => {
         //our .then will run every time our promises execute
-        navigate("/"); 
+        navigate("/");
       })
       .catch((error) => {
-        console.log(error)
+        console.log(error);
         setError("Failed to update account");
       })
       .finally(() => {
         //our .finally will set our loading back to false and it runs if we either succeed or fail
-       
+
         setLoading(false);
-        navigate("/"); 
+        navigate("/");
       });
   }
 
@@ -118,7 +148,25 @@ export default function UpdateProfile() {
                   className="w-full text-center py-3 rounded bg-green text-white hover:bg-green-dark focus:outline-none my-1 createAccountButton"
                   onClick={handleSubmit}
                 >
-                  Update Your Account!
+                  Update Your Account
+                </button>
+
+                <input
+                  type="file"
+                  id="files"
+                  className="p-5"
+                  multiple={false}
+                  accept="image/*"
+                  title="Testing this out"
+                  onChange={handleImageChange}
+                />
+
+                <button
+                  type="submit"
+                  className="w-full text-center py-3 rounded bg-green text-white hover:bg-green-dark focus:outline-none my-1 createAccountButton"
+                  onClick={handleAddProfileImage}
+                >
+                  Submit New Profile Picture
                 </button>
               </div>
               <div>{error && <p>{error}</p>}</div>
