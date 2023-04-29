@@ -10,14 +10,14 @@ export default function Dashboard() {
         <PizzaSidebar />
       </ProSidebarProvider>
       <img
-        className="border-4 border-black rounded-lg relative ml-[270px] p-10"
+        className="border-4 border-black rounded-lg absolute ml-[270px] mt-8 p-10"
         height="500"
         width="500"
         src={BenPizza}
         alt="Picture of ben eating pizza"
       />
-      <h2 className="ml-[270px]">
-        Welcome, to the pizza experience of a lifetime.
+      <h2 className="ml-[270px] relative mt-34">
+        Ben's current favorite pizza, The Pizza Shop By Flour (Hoboken NJ)
       </h2>
     </>
   );

@@ -39,7 +39,7 @@ const PizzaSidebar = () => {
       >
         <main>
           <Menu>
-            <MenuItem>
+            <MenuItem component={<Link to="/" />}>
               <div
                 style={{
                   padding: "9px",

@@ -3,24 +3,40 @@ import { ProSidebarProvider } from "react-pro-sidebar";
 import PizzaSidebar from "../PizzaSidebar/PizzaSidebar";
 import { getDocs, addDoc, collection } from "firebase/firestore";
 import { db } from "../../../firebaseConfig";
-import { Select, MenuItem, FormControl, InputLabel } from "@mui/material";
+import {
+  Select,
+  MenuItem,
+  FormControl,
+  InputLabel,
+  Alert,
+} from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const AddPizzaShop = () => {
   const [pizzaShopName, setPizzaShopName] = useState("");
   const [pizzaShopDescription, setPizzaShopDescription] = useState("");
   const [pizzaShopBorough, setPizzaShopBorough] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   async function handleAddPizzaShop() {
-    console.log(pizzaShopBorough);
-    console.log(pizzaShopName);
-    console.log(pizzaShopDescription);
+    try {
+      await addDoc(collection(db, "PizzaShops"), {
+        pizzaShopName: pizzaShopName,
+        pizzaShopDescription: pizzaShopDescription,
+        pizzaShopBorough: pizzaShopBorough,
+      });
+      navigate("/PizzaShops");
+    } catch (err) {
+      setError(err);
+    }
   }
 
   return (
     <>
       <ProSidebarProvider>
         <PizzaSidebar />
-
+        {error && <Alert severity="error">{error}</Alert>}
         <div className="bg-grey-lighter min-h-screen flex flex-col">
           <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
             <div className="bg-white px-6 py-8 rounded shadow-md text-black w-full">
