@@ -4,6 +4,7 @@ import PizzaSidebar from "../PizzaSidebar/PizzaSidebar";
 import { getDocs, addDoc, collection } from "firebase/firestore";
 import { db, storage } from "../../../firebaseConfig";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import uuid from "react-uuid";
 import {
   Select,
   MenuItem,
@@ -19,7 +20,6 @@ const AddPizzaShop = () => {
   const [pizzaShopBorough, setPizzaShopBorough] = useState("");
   const [error, setError] = useState("");
   const [pizzaShopImageUrl, setPizzaShopImageUrl] = useState("");
-  const [pizzaShopImage, setPizzaShopImage] = useState(null);
 
   const navigate = useNavigate();
 
@@ -31,32 +31,35 @@ const AddPizzaShop = () => {
       storage,
       `pizzashopimages/${pizzaShopName}-Image`
     );
-   
-if (e.currentTarget.files[0]){
-    uploadBytes(pizzaImageReference, e.currentTarget.files[0], metadata)
-      .then(() => {
-        getDownloadURL(pizzaImageReference)
-          .then((downloadUrl) => {
-            setPizzaShopImageUrl(downloadUrl);
-         
-          })
-          .catch((error) => {
-            setError(error)
-          });
-      })
-      .catch((error) => {
-        setError(error)
-      });
+
+    if (e.currentTarget.files[0]) {
+      uploadBytes(pizzaImageReference, e.currentTarget.files[0], metadata)
+        .then(() => {
+          getDownloadURL(pizzaImageReference)
+            .then((downloadUrl) => {
+              setPizzaShopImageUrl(downloadUrl);
+            })
+            .catch((error) => {
+              setError(error);
+            });
+        })
+        .catch((error) => {
+          setError(error);
+        });
+    }
   };
-  } ;
 
   async function handleAddPizzaShop() {
+    const pizzaShopId = uuid();
+    console.log(pizzaShopId);
+
     try {
       await addDoc(collection(db, "PizzaShops"), {
         pizzaShopName: pizzaShopName,
         pizzaShopDescription: pizzaShopDescription,
         pizzaShopBorough: pizzaShopBorough,
         pizzaShopImageUrl: pizzaShopImageUrl,
+        pizzaShopId: pizzaShopId,
       });
       navigate("/PizzaShops");
     } catch (err) {

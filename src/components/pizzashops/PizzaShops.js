@@ -10,7 +10,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-
+import { Link } from "react-router-dom";
 const PizzaShops = () => {
   const [pizzaShops, setPizzaShops] = useState([]);
   const pizzaCollectionRef = collection(db, "PizzaShops");
@@ -59,7 +59,9 @@ const PizzaShops = () => {
                   </Typography>
                 </CardContent>
                 <CardActions>
-                  <Button size="small">View {pizzaShop.pizzaShopName}</Button>
+                  <Link to={`/PizzaShops/${pizzaShop.pizzaShopId}`}>
+                    <Button size="small">View {pizzaShop.pizzaShopName}</Button>
+                  </Link>
                 </CardActions>
               </Card>
             </>
