@@ -12,7 +12,8 @@ import UpdateProfile from "./updateprofile/UpdateProfile";
 import PizzaShops from "./pizzashops/PizzaShops";
 import MyProfile from "./myprofile/MyProfile";
 import AddPizzaShop from "./dashboard/AddPizzaShop/AddPizzaShop";
-
+import SinglePizzaShop from "./singlePizzaShop/SinglePizzaShop";
+import AddRating from "./dashboard/addrating/AddRating";
 const AppRoutes = () => {
   const { currentUser } = useAuth();
 
@@ -24,6 +25,11 @@ const AppRoutes = () => {
             <Route path="/" element={<Dashboard />} />
             <Route path="/UpdateProfile" element={<UpdateProfile />} />
             <Route path="/PizzaShops" element={<PizzaShops />} />
+            <Route path="/AddRating" element={<AddRating />} />
+            <Route
+              path="/PizzaShops/:pizzaShopId"
+              element={<SinglePizzaShop />}
+            />
             <Route path="/AddPizzaShop" element={<AddPizzaShop />} />
             <Route path="/MyProfile" element={<MyProfile />} />
           </>

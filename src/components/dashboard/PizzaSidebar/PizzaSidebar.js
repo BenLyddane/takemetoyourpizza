@@ -10,7 +10,7 @@ import { MdOutlineCreate } from "react-icons/md";
 import { CiPizza } from "react-icons/ci";
 
 import { FaStore } from "react-icons/fa";
-
+import { ImStarHalf } from "react-icons/im";
 import { useAuth } from "../../../context/AuthContext";
 
 const PizzaSidebar = () => {
@@ -74,6 +74,12 @@ const PizzaSidebar = () => {
               icon={<MdOutlineCreate />}
             >
               Add New Pizza Shop
+            </MenuItem>
+            <MenuItem
+              component={<Link to="/AddRating" />}
+              icon={<ImStarHalf />}
+            >
+              Add New Pizza Rating
             </MenuItem>
             <MenuItem icon={<BiLogOut />} onClick={handleLogout}>
               Log Out

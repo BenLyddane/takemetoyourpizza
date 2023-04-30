@@ -13,6 +13,7 @@ import {
   Alert,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../../context/AuthContext";
 
 const AddPizzaShop = () => {
   const [pizzaShopName, setPizzaShopName] = useState("");
@@ -20,7 +21,7 @@ const AddPizzaShop = () => {
   const [pizzaShopBorough, setPizzaShopBorough] = useState("");
   const [error, setError] = useState("");
   const [pizzaShopImageUrl, setPizzaShopImageUrl] = useState("");
-
+  const { currentUser } = useAuth();
   const navigate = useNavigate();
 
   const handleImageChange = (e) => {
@@ -60,6 +61,7 @@ const AddPizzaShop = () => {
         pizzaShopBorough: pizzaShopBorough,
         pizzaShopImageUrl: pizzaShopImageUrl,
         pizzaShopId: pizzaShopId,
+        addedBy: currentUser.uid,
       });
       navigate("/PizzaShops");
     } catch (err) {
