@@ -38,7 +38,7 @@ const Ratings = () => {
               <Card
                 key={rating.id}
                 className="relative m-5"
-                sx={{ maxWidth: 345, minWidth: 200 }}
+                sx={{ maxWidth: 345, minWidth: 200 , maxHeight: 700}}
               >
                 <CardMedia
                   component="img"
@@ -68,9 +68,9 @@ const Ratings = () => {
                   </Typography>
                 </CardContent>
                 <CardActions>
-                  <Link to={`/ratings/${rating.ratingId}`}>
+                  {/* <Link to={`/ratings/${rating.ratingId}`}>
                     <Button size="small">View {rating.pizzaShopName}</Button>
-                  </Link>
+                  </Link> */}
                 </CardActions>
               </Card>
             </>

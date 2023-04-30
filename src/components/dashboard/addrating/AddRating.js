@@ -116,7 +116,7 @@ const AddRating = () => {
     }
   }
 
-  const handleImageChange = (e) => {
+  const handleImageChange = async (e) => {
     const metadata = {
       contentType: "image/",
     };
@@ -126,7 +126,11 @@ const AddRating = () => {
     );
 
     if (e.currentTarget.files[0]) {
-      uploadBytes(ratingImageReference, e.currentTarget.files[0], metadata)
+      await uploadBytes(
+        ratingImageReference,
+        e.currentTarget.files[0],
+        metadata
+      )
         .then(() => {
           getDownloadURL(ratingImageReference)
             .then((downloadUrl) => {

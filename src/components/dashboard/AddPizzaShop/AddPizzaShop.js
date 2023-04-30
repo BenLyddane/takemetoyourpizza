@@ -24,7 +24,7 @@ const AddPizzaShop = () => {
   const { currentUser } = useAuth();
   const navigate = useNavigate();
 
-  const handleImageChange = (e) => {
+  const  handleImageChange = async (e) => {
     const metadata = {
       contentType: "image/",
     };
@@ -34,7 +34,7 @@ const AddPizzaShop = () => {
     );
 
     if (e.currentTarget.files[0]) {
-      uploadBytes(pizzaImageReference, e.currentTarget.files[0], metadata)
+      await uploadBytes(pizzaImageReference, e.currentTarget.files[0], metadata)
         .then(() => {
           getDownloadURL(pizzaImageReference)
             .then((downloadUrl) => {
