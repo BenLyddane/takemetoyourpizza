@@ -57,6 +57,9 @@ const PizzaShops = () => {
                   <Typography gutterBottom variant="h7" component="div">
                     Description: {pizzaShop.pizzaShopDescription}
                   </Typography>
+                  <Typography gutterBottom variant="h7" component="div">
+                    Pizza Shop Added By: {pizzaShop.addedBy}
+                  </Typography>
                 </CardContent>
                 <CardActions>
                   {/* <Link to={`/PizzaShops/${pizzaShop.pizzaShopId}`}>
