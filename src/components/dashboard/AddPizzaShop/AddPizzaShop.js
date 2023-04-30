@@ -61,7 +61,7 @@ const AddPizzaShop = () => {
         pizzaShopBorough: pizzaShopBorough,
         pizzaShopImageUrl: pizzaShopImageUrl,
         pizzaShopId: pizzaShopId,
-        addedBy: currentUser.uid,
+        addedBy: currentUser.displayName,
       });
       navigate("/PizzaShops");
     } catch (err) {
