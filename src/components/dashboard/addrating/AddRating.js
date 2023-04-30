@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import FormGroup from "@mui/material/FormGroup";
 import Checkbox from "@mui/material/Checkbox";
 import Box from "@mui/material/Box";
@@ -11,6 +11,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import Card from "@mui/material/Card";
+import uuid from "react-uuid";
 let meatToppings = [
   "Ham",
   "Beef",
@@ -41,20 +42,36 @@ let pizzaStyle = [
   "Flat-Bread",
   "Grandma Slice",
 ];
+
 const AddRating = () => {
+  const [overallRating, setOverallRating] = useState(5);
+  const [cheeseRating, setCheeseRating] = useState(5);
+  const [sauceRating, setSauceRating] = useState(5);
+  const [crustRating, setCrustRating] = useState(5);
+  function handleCheese() {}
+  function handleSauce() {}
+  function handleCrust() {}
+  function handleOverallRating(e) {
+    setOverallRating(e.target.value);
+    console.log(overallRating);
+  }
+
   return (
     <>
       <ProSidebarProvider>
         <PizzaSidebar />
       </ProSidebarProvider>
-      <Card   className="absolute ml-72 m-3 p-5"
-                sx={{ maxWidth: 500, minWidth: 200 }}>
+      <Card
+        className="absolute ml-72 m-3 p-5"
+        sx={{ maxWidth: 500, minWidth: 200 }}
+      >
         <Box sx={{ width: 300 }}>
           <label>Overall Pizza Rating</label>
           <Slider
             aria-label="Cheese Rating"
             defaultValue={5}
             valueLabelDisplay="auto"
+            onChange={handleOverallRating}
             step={0.1}
             marks={true}
             min={0}
@@ -96,7 +113,7 @@ const AddRating = () => {
             <FormLabel>Meat</FormLabel>
             {meatToppings.map((meat) => {
               return (
-                <FormControlLabel control={<Checkbox />} label={`${meat}`} />
+                <FormControlLabel key={uuid()} control={<Checkbox />} label={`${meat}`} />
               );
             })}
           </FormGroup>
@@ -104,7 +121,7 @@ const AddRating = () => {
             <FormLabel>Veggie</FormLabel>
             {veggieToppings.map((veggie) => {
               return (
-                <FormControlLabel control={<Checkbox />} label={`${veggie}`} />
+                <FormControlLabel key={uuid()} control={<Checkbox />} label={`${veggie}`} />
               );
             })}
           </FormGroup>
@@ -121,6 +138,7 @@ const AddRating = () => {
                     value={`${pizza}`}
                     control={<Radio />}
                     label={`${pizza}`}
+                    key={uuid()}
                   />
                 );
               })}
@@ -163,7 +181,7 @@ const AddRating = () => {
             </RadioGroup>
           </FormControl> */}
         </div>
-        </Card>
+      </Card>
     </>
   );
 };
