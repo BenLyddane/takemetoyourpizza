@@ -42,7 +42,7 @@ const Ratings = () => {
               >
                 <CardMedia
                   component="img"
-                  alt="Profile Picture"
+                  alt="Rating No Picture"
                   height="140"
                   image={rating.ratingImageUrl}
                 />

@@ -46,7 +46,7 @@ const PizzaShops = () => {
               >
                 <CardMedia
                   component="img"
-                  alt="Profile Picture"
+                  alt="Pizza Shop No Picture"
                   height="140"
                   image={pizzaShop.pizzaShopImageUrl}
                 />
@@ -59,9 +59,9 @@ const PizzaShops = () => {
                   </Typography>
                 </CardContent>
                 <CardActions>
-                  <Link to={`/PizzaShops/${pizzaShop.pizzaShopId}`}>
+                  {/* <Link to={`/PizzaShops/${pizzaShop.pizzaShopId}`}>
                     <Button size="small">View {pizzaShop.pizzaShopName}</Button>
-                  </Link>
+                  </Link> */}
                 </CardActions>
               </Card>
             </>

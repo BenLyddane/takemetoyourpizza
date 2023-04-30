@@ -208,8 +208,9 @@ const AddRating = () => {
           sx={{ width: 300 }}
           className="inline-flex flex-wrap justify-items-center justify-center"
         >
+          <label>Overall Rating</label>
           <Slider
-            aria-label="Cheese Rating"
+            aria-label="Overall Rating"
             defaultValue={5}
             valueLabelDisplay="auto"
             onChange={handleOverallRating}
