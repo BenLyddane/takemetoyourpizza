@@ -16,7 +16,6 @@ const MyProfile = () => {
   return (
     <ProSidebarProvider backgroundColor="#FFA600">
       <PizzaSidebar />
-
       <Card className="absolute mt-5 ml-72 p-5" sx={{ maxWidth: 345 }}>
         <CardMedia
           component="img"
@@ -36,8 +35,6 @@ const MyProfile = () => {
           <Button size="small">Temp</Button>
         </CardActions>
       </Card>
-
-  
     </ProSidebarProvider>
   );
 };
