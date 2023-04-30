@@ -12,7 +12,7 @@ import { CiPizza } from "react-icons/ci";
 import { FaStore } from "react-icons/fa";
 import { ImStarHalf } from "react-icons/im";
 import { useAuth } from "../../../context/AuthContext";
-
+import { GrScorecard } from "react-icons/gr";
 const PizzaSidebar = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -80,6 +80,9 @@ const PizzaSidebar = () => {
               icon={<ImStarHalf />}
             >
               Add New Pizza Rating
+            </MenuItem>
+            <MenuItem component={<Link to="/Ratings" />} icon={<GrScorecard />}>
+              View Ratings
             </MenuItem>
             <MenuItem icon={<BiLogOut />} onClick={handleLogout}>
               Log Out

@@ -21,6 +21,7 @@ import MenuItem from "@mui/material/MenuItem";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import Select from "@mui/material/Select";
 import { useNavigate } from "react-router-dom";
+import Alert from "@mui/material/Alert";
 let meatToppings = [
   "Ham",
   "Beef",
@@ -81,22 +82,17 @@ const AddRating = () => {
     getPizzaShops();
   }, []);
 
-  
   function handleCheeseRating(e) {
     setCheeseRating(e.target.value);
-    console.log(overallRating);
   }
   function handleSauceRating(e) {
     setSauceRating(e.target.value);
-    console.log(overallRating);
   }
   function handleCrustRating(e) {
     setCrustRating(e.target.value);
-    console.log(overallRating);
   }
   function handleOverallRating(e) {
     setOverallRating(e.target.value);
-    console.log(overallRating);
   }
 
   function handleSelectChange(e) {
@@ -111,12 +107,10 @@ const AddRating = () => {
     if (e.target.checked) {
       if (!toppingsArr.includes(e.target.value)) {
         toppingsArr.push(e.target.value);
-        console.log(toppingsArr);
       } else if (!e.target.checked) {
         if (toppingsArr.includes(e.target.value)) {
           const index = toppingsArr.findIndex(e.target.value);
           toppingsArr.splice(index, 1);
-          console.log(toppingsArr);
         }
       }
     }
@@ -162,7 +156,9 @@ const AddRating = () => {
         // toppings: [meatChecked, veggieChecked],
         style: style,
         ratingId: newRatingId,
-        dateRatingSubmitted: Date.now(),
+        ratingUser: currentUser.uid,
+        addedBy: currentUser.displayName,
+        dateRatingSubmitted: new Date().toDateString(),
       });
       navigate("/ratings");
     } catch (err) {
@@ -175,30 +171,33 @@ const AddRating = () => {
       <ProSidebarProvider>
         <PizzaSidebar />
       </ProSidebarProvider>
-      <div className="flex flex-wrap ml-72 -3 p-3">
-        <Card
-          key={uuid()}
-          className="relative m-5"
-          sx={{ maxWidth: 600, minWidth: 500 }}
-        >
-          <div>
-            <FormControl sx={{ m: 1, minWidth: 345 }}>
-              <InputLabel id="">Select Pizza Shop</InputLabel>
-              <Select autoWidth label="Age" onChange={handleSelectChange}>
-                {pizzaShops.map((pizzaShop) => {
-                  return (
-                    <MenuItem key={uuid()} value={pizzaShop.pizzaShopName}>
-                      <em>{pizzaShop.pizzaShopName}</em>
-                    </MenuItem>
-                  );
-                })}
-              </Select>
-            </FormControl>
-          </div>
-        </Card>
+      {error && <Alert severity="error">{error}</Alert>}
+      <div className="flex flex-wrap ml-72  p-5">
+        <div className="bg-pizza-yellow">
+          <FormControl sx={{ m: 1, minWidth: 345 }}>
+            <InputLabel id="">Select Pizza Shop</InputLabel>
+            <Select
+              autoWidth
+              defaultValue={""}
+              label="Selected pizza shop"
+              onChange={handleSelectChange}
+            >
+              <MenuItem disabled value="">
+                <em>Need to select shop</em>
+              </MenuItem>
+              {pizzaShops.map((pizzaShop) => {
+                return (
+                  <MenuItem key={uuid()} value={pizzaShop.pizzaShopName}>
+                    <p>{pizzaShop.pizzaShopName}</p>
+                  </MenuItem>
+                );
+              })}
+            </Select>
+          </FormControl>
+        </div>
       </div>
       <Card
-        className="absolute ml-72 m-3 p-5 align-middle flex flex-wrap justify-items-center"
+        className="absolute ml-72 m-3 p-8 align-middle flex flex-wrap justify-items-center"
         sx={{ maxWidth: 600, minWidth: 200 }}
       >
         <CardHeader
