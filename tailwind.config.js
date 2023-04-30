@@ -7,7 +7,11 @@ module.exports = {
     fontFamily: {
       sans: ["Helvetica Neue", ...defaultTheme.fontFamily.sans],
     },
-    extend: {},
+    extend: {
+      colors: {
+        "pizza-yellow": "#FFA600",
+      },
+    },
   },
   plugins: [],
 };
